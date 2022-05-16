@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
+const Lodging = require('./models/lodging')
 
-let notes = [
+let lodgings = [
   {
     "name": "Heta",
     "age": 19,
@@ -12,11 +14,31 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/notes', (req, res) => {
-  res.json(notes)
+app.get('/api/lodgings', (request, response) => {
+  Lodging.find({}).then(lodgings => {
+    response.json(lodgings)
+  })
 })
 
-const PORT = 3001
+app.get('/api/lodgings/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const lodging = lodgings.find(lodging => lodging.id === id)
+  
+  if (lodging) {
+    response.json(lodging)
+  } else {
+    response.status(404).end()
+  }
+})
+
+app.delete('/api/lodgings/:id', (request, response) => {
+  const id = Number(request.params.id)
+  lodgings = lodgings.filter(lodging => lodging.id !== id)
+
+  response.status(204).end()
+})
+
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
