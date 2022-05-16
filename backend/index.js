@@ -21,14 +21,9 @@ app.get('/api/lodgings', (request, response) => {
 })
 
 app.get('/api/lodgings/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const lodging = lodgings.find(lodging => lodging.id === id)
-  
-  if (lodging) {
+  Lodging.findById(request.params.id).then(lodging => {
     response.json(lodging)
-  } else {
-    response.status(404).end()
-  }
+  })
 })
 
 app.delete('/api/lodgings/:id', (request, response) => {
@@ -36,6 +31,25 @@ app.delete('/api/lodgings/:id', (request, response) => {
   lodgings = lodgings.filter(lodging => lodging.id !== id)
 
   response.status(204).end()
+})
+
+app.post('/api/lodging', (request, response) => {
+  const body = request.body
+
+  if (body.arrival === undefined) {
+    return response.status(400).json({ error: 'content missing' })
+  }
+
+  const lodging = new Lodging({
+    arrival: body.arrival,
+    adults: body.adults,
+    children: body.children,
+    departure: null,
+  })
+
+  lodging.save().then(savedLodging => {
+    response.json(savedLodging)
+  })
 })
 
 const PORT = process.env.PORT
