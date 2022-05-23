@@ -27,6 +27,12 @@ const App = () => {
 
   var people = adults + children
 
+  //kun laittaa 7, lukee, että 70
+  const handleAdultsChange = (event) => {
+    console.log(event.target.value)
+    setAdults(event.target.value)
+  }
+
   return (
     <div id='wrapper'>
       <div id='header'>
@@ -40,7 +46,7 @@ const App = () => {
 
             <label>Aikuisia:</label> <br/>
             <button type='button' onClick={minusA}>-</button>
-            <span>{adults}</span>
+            <input value={adults} onChange={handleAdultsChange}/>
             <button type='button' onClick={plusA}>+</button> <br/>
 
             <label>Lapsia: </label> <br/>
