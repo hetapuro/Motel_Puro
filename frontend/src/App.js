@@ -1,9 +1,21 @@
 import { useState } from 'react'
+import lodgingService from './services/lodging'
 import './App.css'
 
 const App = () => {
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
+  const [arrival, setArrival] = useState(new Date())
+
+  const addLodging = (event) => {
+    event.preventDefault()
+    const lodging = {
+      arrival,
+      adults,
+      children
+    }
+    lodgingService.create(lodging)
+  }
 
   const minusA = () => {
     if (adults > 1) {
@@ -27,10 +39,18 @@ const App = () => {
 
   var people = adults + children
 
-  //kun laittaa 7, lukee, että 70
   const handleAdultsChange = (event) => {
     console.log(event.target.value)
-    setAdults(event.target.value)
+    setAdults(event.target.value === "" ? 0 : parseInt(event.target.value))
+  }
+
+  const handleChildrenChange = (event) => {
+    console.log(event.target.value)
+    setChildren(event.target.value === "" ? 0 : parseInt(event.target.value))
+  }
+
+  const handleArrivalChange = (event) => {
+    setArrival(new Date(event.target.value))
   }
 
   return (
@@ -40,18 +60,18 @@ const App = () => {
       </div>
       <div>
         <h2>Majoittaudu</h2>
-        <form>
+        <form onSubmit={addLodging}>
             <label>Saapumispäivä:</label> <br/>
-            <input type='date'/>
+            <input value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
 
             <label>Aikuisia:</label> <br/>
             <button type='button' onClick={minusA}>-</button>
-            <input value={adults} onChange={handleAdultsChange}/>
+            <input value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
             <button type='button' onClick={plusA}>+</button> <br/>
 
             <label>Lapsia: </label> <br/>
             <button type='button' onClick={minusC}>-</button>
-            <span>{children}</span>
+            <input value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
             <button type='button' onClick={plusC}>+</button>
             <p>Henkilöiden määrä: {people}</p>
   

@@ -2,13 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const Lodging = require('./models/lodging')
+const cors = require('cors')
 
-let lodgings = [
-  {
-    "name": "Heta",
-    "age": 19,
-    }
-]
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
@@ -33,8 +29,9 @@ app.delete('/api/lodgings/:id', (request, response) => {
   response.status(204).end()
 })
 
-app.post('/api/lodging', (request, response) => {
+app.post('/api/lodgings', (request, response) => {
   const body = request.body
+  console.log(body)
 
   if (body.arrival === undefined) {
     return response.status(400).json({ error: 'content missing' })
@@ -52,7 +49,7 @@ app.post('/api/lodging', (request, response) => {
   })
 })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
