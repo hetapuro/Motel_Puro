@@ -4,7 +4,6 @@ import './App.css'
 const App = () => {
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
-  const [people, setPeople] = useState(1)
 
   const minusA = () => {
     if (adults > 1) {
@@ -26,15 +25,12 @@ const App = () => {
     setChildren(children + 1)
   }
 
-  // const sum = () => {
-    
-  // }
+  var people = adults + children
 
   //kun laittaa 7, lukee, että 70
   const handleAdultsChange = (event) => {
     console.log(event.target.value)
     setAdults(event.target.value)
-    setPeople(adults + children)
   }
 
   return (
