@@ -58,28 +58,30 @@ const App = () => {
       <div id='header'>
         <h1>Le Motel de Puro</h1>
       </div>
-      <div>
-        <h2>Majoittaudu</h2>
-        <form onSubmit={addLodging}>
-            <label>Saapumispäivä:</label> <br/>
-            <input value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
+      <div id='middle'>
+        <div id='formBG'>
+          <h2>Majoittaudu</h2>
+          <form onSubmit={addLodging}>
+              <label>Saapumispäivä:</label> <br/>
+              <input value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
 
-            <label>Aikuisia:</label> <br/>
-            <button type='button' onClick={minusA}>-</button>
-            <input value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
-            <button type='button' onClick={plusA}>+</button> <br/>
+              <label>Aikuisia:</label> <br/>
+              <button type='button' onClick={minusA}>-</button>
+              <input value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
+              <button type='button' onClick={plusA}>+</button> <br/>
 
-            <label>Lapsia: </label> <br/>
-            <button type='button' onClick={minusC}>-</button>
-            <input value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
-            <button type='button' onClick={plusC}>+</button>
-            <p>Henkilöiden määrä: {people}</p>
-  
-          <button type='submit'>Kirjaa majoittautuminen</button>
-        </form>
+              <label>Lapsia: </label> <br/>
+              <button type='button' onClick={minusC}>-</button>
+              <input value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
+              <button type='button' onClick={plusC}>+</button>
+              <p>Henkilöiden määrä: {people}</p>
+    
+            <button type='submit'>Kirjaa majoittautuminen</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <h2>Majoittautumiset</h2>
+      <div id='footer'>
+        <p>Heta Puro 2022</p>
       </div>
     </div>
   )

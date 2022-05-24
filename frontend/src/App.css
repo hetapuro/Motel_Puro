@@ -4,13 +4,38 @@ html, body, #root, #wrapper {
   margin: 0;
   padding: 0;
 }
-/* #header {
-  height: 10%;
+
+#header {
+  height: 8%;
   width: 100%;
   background-color: #fe0000;
   margin: 0;
-} */
+}
 
-h1 {
+h1, h2 {
   margin: 0;
+}
+
+#middle {
+  height: 82%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#formBG {
+  background-color: #ffff01;
+  padding: 2%;
+}
+
+#footer {
+  height: 10%;
+  width: 100%;
+  background-color: black;
+}
+
+#footer > p {
+  margin: 0;
+  color: white;
 }
