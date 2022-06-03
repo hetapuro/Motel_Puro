@@ -1,57 +1,34 @@
-import { useState } from 'react'
-import lodgingService from './services/lodging'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import './App.css'
+// import Lodging from './components/Lodging'
+
+const Lodging = ({lodging}) => {
+  const people = lodging.adults + lodging.children
+  const a = lodging.arrival.toString().slice(0, 10)
+
+  return (
+    <tr>
+      <th>Etunimi Sukunimi</th>
+      <th>{a}</th>
+      <th>{lodging.departure}</th>
+      <th>{people}</th>
+    </tr>
+  )
+}
 
 const App = () => {
-  const [adults, setAdults] = useState(1)
-  const [children, setChildren] = useState(0)
-  const [arrival, setArrival] = useState(new Date())
+  const [lodgings, setLodgings] = useState([])
 
-  const addLodging = (event) => {
-    event.preventDefault()
-    const lodging = {
-      arrival,
-      adults,
-      children
-    }
-    lodgingService.create(lodging)
-  }
-
-  const minusA = () => {
-    if (adults > 1) {
-      setAdults(adults - 1)
-    }
-  }
-
-  const plusA = () => {
-    setAdults(adults + 1)
-  }
-
-  const minusC = () => {
-    if (children > 0) {
-      setChildren(children - 1)
-    }
-  }
-
-  const plusC = () => {
-    setChildren(children + 1)
-  }
-
-  var people = adults + children
-
-  const handleAdultsChange = (event) => {
-    console.log(event.target.value)
-    setAdults(event.target.value === "" ? 0 : parseInt(event.target.value))
-  }
-
-  const handleChildrenChange = (event) => {
-    console.log(event.target.value)
-    setChildren(event.target.value === "" ? 0 : parseInt(event.target.value))
-  }
-
-  const handleArrivalChange = (event) => {
-    setArrival(new Date(event.target.value))
-  }
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/api/lodgings')
+      .then(response => {
+        console.log('promise fulfilled')
+        setLodgings(response.data)
+      })
+  }, [])
 
   return (
     <div id='wrapper'>
@@ -59,26 +36,22 @@ const App = () => {
         <h1>Le Motel de Puro</h1>
       </div>
       <div id='middle'>
-        <div id='formBG'>
-          <h2>Majoittaudu</h2>
-          <form onSubmit={addLodging}>
-              <label>Saapumispäivä:</label> <br/>
-              <input value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
-
-              <label>Aikuisia:</label> <br/>
-              <button type='button' onClick={minusA}>-</button>
-              <input value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
-              <button type='button' onClick={plusA}>+</button> <br/>
-
-              <label>Lapsia: </label> <br/>
-              <button type='button' onClick={minusC}>-</button>
-              <input value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
-              <button type='button' onClick={plusC}>+</button>
-              <p>Henkilöiden määrä: {people}</p>
-    
-            <button type='submit'>Kirjaa majoittautuminen</button>
-          </form>
-        </div>
+        <h2>Majoituksia yhteensä: </h2>
+        <table>
+          <thead>
+            <tr>
+              <th className='bold'>Nimi</th>
+              <th className='bold'>Saapumispäivä</th>
+              <th className='bold'>Lähtöpäivä</th>
+              <th className='bold'>Henkilöt</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lodgings.map(lodging =>
+              <Lodging key={lodging.id} lodging={lodging} />
+              )}
+          </tbody>
+        </table>
       </div>
       <div id='footer'>
         <p>Heta Puro 2022</p>
