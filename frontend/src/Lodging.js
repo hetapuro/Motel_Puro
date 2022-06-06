@@ -59,24 +59,24 @@ const Lodging = () => {
         <h1>Le Motel de Puro</h1>
       </div>
       <div id='middle'>
-        <div id='formBG'>
+        <div className='formBG'>
           <h2>KIRJAA MAJOITTAUTUMINEN</h2>
           <form onSubmit={addLodging}>
-              <label>Saapumispäivä:</label> <br/>
-              <input id='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
-               
-              <label>Aikuisia:</label> <br/>
-              <button type='button' onClick={minusA}>-</button>
-              <input className='counter' value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
-              <button type='button' onClick={plusA}>+</button> <br/>
+            <label>Saapumispäivä:</label> <br/>
+            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
+              
+            <label>Aikuisia:</label> <br/>
+            <button type='button' onClick={minusA}>-</button>
+            <input className='counter' value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
+            <button type='button' onClick={plusA}>+</button> <br/>
 
-              <label>Lapsia: </label> <br/>
-              <button type='button' onClick={minusC}>-</button>
-              <input className='counter' value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
-              <button type='button' onClick={plusC}>+</button>
-              <p>Henkilöiden määrä: <b>{people}</b></p>
+            <label>Lapsia: </label> <br/>
+            <button type='button' onClick={minusC}>-</button>
+            <input className='counter' value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
+            <button type='button' onClick={plusC}>+</button>
+            <p>Henkilöiden määrä: <b>{people}</b></p>
 
-            <button id='submit' type='submit'>KIRJAA</button>
+            <button className='submit' type='submit'>KIRJAA</button>
           </form>
         </div>
       </div>
