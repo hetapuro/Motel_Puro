@@ -5,8 +5,8 @@ const baseUrl = 'http://localhost:3001/api/lodgings'
 
 //getSpesifics
 
-const create = (lodging) => {
-    const request = axios.post(baseUrl,lodging)
+const create = (data) => {
+    const request = axios.post(baseUrl,data)
     return request.then(response => response.data)
 }
 

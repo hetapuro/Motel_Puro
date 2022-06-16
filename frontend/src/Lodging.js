@@ -2,19 +2,20 @@ import { useState } from 'react'
 import lodgingService from './services/lodging'
 import './Lodging.css'
 
-const Lodging = () => {
+const Lodging = ({ authedUser }) => {
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [arrival, setArrival] = useState(new Date())
 
   const addLodging = (event) => {
     event.preventDefault()
-    const lodging = {
+    const data = {
       arrival,
       adults,
-      children
+      children,
+      user_id: authedUser.id
     }
-    lodgingService.create(lodging)
+    lodgingService.create(data)
   }
 
   const minusA = () => {
