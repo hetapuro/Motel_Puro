@@ -6,12 +6,13 @@ const getUserByEmail = async (email) => {
     return user
   }
 
-const createUser = async (email, password) => {
+const createUser = async (email, password, isAdmin) => {
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(password, saltRounds)
     const new_user = new User({
         email,
-        password: passwordHash
+        password: passwordHash,
+        isAdmin
       })
     
     const saved_user = await new_user.save()
@@ -24,8 +25,18 @@ const getUserById = async (id) => {
     return user
 }
 
+const setAdminRights = async (user_id, newIsAdmin) => {
+  const new_user = await User.findByIdAndUpdate(user_id, { isAdmin: newIsAdmin })
+  return new_user
+}
+
+const deleteUser = async (user_id) => {
+  await User.findByIdAndDelete(user_id)
+}
+
 module.exports = {
     getUserByEmail,
     createUser,
-    getUserById
+    getUserById,
+    setAdminRights
 }
