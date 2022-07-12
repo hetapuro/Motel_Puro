@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import lodgingService from './services/lodging'
-import './Lodging.css'
+import './CSS/Lodging.css'
 
 const Lodging = ({ authedUser }) => {
   const [adults, setAdults] = useState(1)

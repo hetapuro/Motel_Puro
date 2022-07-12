@@ -78,10 +78,10 @@ html, body, #root, #wrapper {
     color: white;
   }
   
-  @media only screen and (max-width: 600px) {
+  /* @media only screen and (max-width: 600px) {
     table, thead, tbody, th, td, tr {
         display: flex;
         flex-direction: column;
         margin: 0;
     }
-  }
+  } */
