@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { loginUser } from "./services/auth"
+import './CSS/LoginForm.css'
 
 const LoginForm = ({ handleLogin }) => {
     const [email, setEmail ] = useState("")
@@ -18,12 +19,31 @@ const LoginForm = ({ handleLogin }) => {
         }
     }
     return(
-    <form onSubmit={checkCredentials}>
-        <p>Kirjaudu</p>
-        <input value={email} onChange={handleEmailChange}/> <br/>
-        <input value={password} onChange = {handlePasswordChange}/> <br/>
-        <button className='submit' type='submit'>Kirjaudu</button>
-      </form>
+    <div id='wrapper'>
+        <div id='header'>
+        <h1>Le Motel de Puro</h1>
+        </div>
+        <div id='middle'>
+        <div className='formBG'>
+            <h1>TERVETULOA!</h1>
+            <h2>Aloita kirjautumalla</h2>
+            <form onSubmit={checkCredentials}>
+            <label>Sähköposti:</label> <br/>
+            <input type='email' onChange={handleEmailChange} value={email} placeholder='esimerkki@esim.com'/> <br/>
+            <label>Salasana:</label> <br/>
+            <input type='password' value={password} onChange={handlePasswordChange} placeholder='salasana123'/> <br/>
+
+            <button className='submit' type='submit'>KIRJAUDU</button> 
+            </form>
+            <p>
+            <a href=''>Unohditko salasanasi?</a>
+            </p>
+        </div>
+        </div>
+        <div id='footer'>
+        <p>2022 Heta Puro, Touko Puro</p>
+        </div>
+    </div>
     )
 
 }

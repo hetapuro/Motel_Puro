@@ -1,26 +1,16 @@
 import { useState, useEffect } from 'react'
 import lodgingService from './services/lodging'
 import axios from 'axios'
-import './Lodging.css'
 import LoginForm from "./LoginForm"
 import { getAuthedUser } from "./services/users"
 
 const App = () => {
-  const [lodgings, setLodgings] = useState([])
-  const [departure, setDeparture] = useState(new Date())
   const [loggedIn, setLoggedIn ] = useState(false)
   const [authedUser, setAuthedUser ] = useState(null)
 
   const handleLogin = async () => {
       const user = await getAuthedUser()
       setAuthedUser(user)
-  }
-  const changeLodging = (event) => {
-    event.preventDefault()
-  }
-
-  const handleDepartureChange = (event) => {
-    setDeparture(new Date(event.target.value))
   }
 
   useEffect(() => {
@@ -40,42 +30,93 @@ const App = () => {
       }
   }, [authedUser])
 
-  // lodgingService
-  //   .update(id, changedLodging)
-  //   .then(response => {
-  //     setLodgings(lodgings.map(lodging => lodging.id !== id ? lodging : response.data))
-  //   })
+  const [adults, setAdults] = useState(1)
+  const [children, setChildren] = useState(0)
+  const [arrival, setArrival] = useState(new Date())
+
+  const addLodging = (event) => {
+    event.preventDefault()
+    const data = {
+      arrival,
+      adults,
+      children,
+      user_id: authedUser.id
+    }
+    lodgingService.create(data)
+  }
+
+  const minusA = () => {
+    if (adults > 1) {
+      setAdults(adults - 1)
+    }
+  }
+
+  const plusA = () => {
+    setAdults(adults + 1)
+  }
+
+  const minusC = () => {
+    if (children > 0) {
+      setChildren(children - 1)
+    }
+  }
+
+  const plusC = () => {
+    setChildren(children + 1)
+  }
+
+  var people = adults + children
+
+  const handleAdultsChange = (event) => {
+    console.log(event.target.value)
+    setAdults(event.target.value === "" ? 0 : parseInt(event.target.value))
+  }
+
+  const handleChildrenChange = (event) => {
+    console.log(event.target.value)
+    setChildren(event.target.value === "" ? 0 : parseInt(event.target.value))
+  }
+
+  const handleArrivalChange = (event) => {
+    setArrival(new Date(event.target.value))
+  }
 
   return (
-      <div>
+      <div id='root'>
           {!loggedIn && (
               <LoginForm handleLogin = {handleLogin}/>
           )}
           {loggedIn && (
-                  <div id='wrapper'>
-                  <div id='header'>
-                    <h1>Le Motel de Puro</h1>
-                  </div>
-                  <div id='middle'>
-                    <div className='formBG'>
-                      <h2>LOPETA MAJOITTAUTUMINEN</h2>
-                      <form onSubmit={changeLodging}>
-                        <p>Saapumispäivä:</p>
-                        <p><b>30.05.2022</b></p>
-                        <p>Henkilöiden määrä:</p>
-                        <p><b>3</b></p>
-            
-                        <label>Lähtöpäivä:</label> <br/>
-                        <input className='date' value={departure.toISOString().slice(0, 10)} type='date' onChange={handleDepartureChange}/> <br/>
-            
-                        <button className='submit' type='submit'>KIRJAA</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div id='footer'>
-                    <p>Heta Puro 2022</p>
+                <div id='wrapper'>
+                <div id='header'>
+                  <h1>Le Motel de Puro</h1>
+                </div>
+                <div id='middle'>
+                  <div className='formBG'>
+                    <h2>KIRJAA MAJOITTAUTUMINEN</h2>
+                    <form onSubmit={addLodging}>
+                      <label>Saapumispäivä:</label> <br/>
+                      <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
+                        
+                      <label>Aikuisia:</label> <br/>
+                      <button type='button' onClick={minusA}>-</button>
+                      <input className='counter' value={adults === 0 ? "" : adults} onChange={handleAdultsChange}/>
+                      <button type='button' onClick={plusA}>+</button> <br/>
+          
+                      <label>Lapsia: </label> <br/>
+                      <button type='button' onClick={minusC}>-</button>
+                      <input className='counter' value={children === 0 ? "" : children} onChange={handleChildrenChange}/>
+                      <button type='button' onClick={plusC}>+</button>
+                      <p>Henkilöiden määrä: <b>{people}</b></p>
+          
+                      <button className='submit' type='submit'>KIRJAA</button>
+                    </form>
                   </div>
                 </div>
+                <div id='footer'>
+                  <p>Heta Puro 2022</p>
+                </div>
+              </div>
           )}
       </div>
   )
