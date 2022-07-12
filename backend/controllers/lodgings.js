@@ -20,7 +20,7 @@ const Lodging = require("../models/lodging")
       adults: request.body.adults,
       children: request.body.children,
       departure: null,
-      user_id: request.body.user_id
+      user_id: request.user.id
     })
   
     lodging.save().then(savedLodging => {

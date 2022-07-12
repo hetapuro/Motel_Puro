@@ -39,8 +39,7 @@ const App = () => {
     const data = {
       arrival,
       adults,
-      children,
-      user_id: authedUser.id
+      children
     }
     lodgingService.create(data)
   }
