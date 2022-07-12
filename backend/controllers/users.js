@@ -2,7 +2,7 @@ const usersRouter = require("express").Router()
 const usersService = require("../services/users")
 
 usersRouter.post('/', async (request, response) => {
-    if(true){
+    if(req.user.isAdmin){
         const new_user = await usersService.createUser(request.body.email, request.body.password)
         response.json(new_user)
     }
