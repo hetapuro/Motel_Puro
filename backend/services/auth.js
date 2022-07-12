@@ -16,6 +16,7 @@ passport.deserializeUser(async (userID, done) => {
 })
 
 const authenticateUser = async (email, password, done) => {
+  console.log(email, password)
   const user = await usersRepository.getUserByEmail(email)
   if (!user) {
     return done(null, false, { message: "No user with that email" })

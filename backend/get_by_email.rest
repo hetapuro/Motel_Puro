@@ -1,19 +1,9 @@
-POST http://localhost:3001/api/lodgings
+POST http://localhost:3001/api/auth/email
 Content-Type: application/json
 
 
 {
-    arrival: new Date()
+  email: "puro.touko@gmail.com",
+  password: "1234"
 }
 
-    const lodging = new Lodging({
-      arrival: request.body.arrival,
-      adults: request.body.adults,
-      children: request.body.children,
-      departure: null,
-      user_id: request.body.user_id
-    })
-{
-  "email": "testi@gmail.com",
-  "password": "1234"
-}
