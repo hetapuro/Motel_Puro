@@ -33,13 +33,9 @@ const App = () => {
   //   })
 
   return (
-    <div id='wrapper'>
-        <div id='header'>
-            <h1>Le Motel de Puro</h1>
-        </div>
         <div id='middle'>
           <div className='formBG'>
-              <h2>LOPETA MAJOITTAUTUMINEN</h2>
+              <h2 className='title'>LOPETA MAJOITTAUTUMINEN</h2>
               <form onSubmit={changeLodging}>
                 <p>Saapumispäivä:</p>
                 <p><b>{lodging.arrival}</b></p>
@@ -53,10 +49,6 @@ const App = () => {
               </form>
           </div>
         </div>
-        <div id='footer'>
-          <p>Heta Puro 2022</p>
-        </div>
-    </div>
   )
 
 }

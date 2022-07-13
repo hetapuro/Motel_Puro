@@ -65,13 +65,9 @@ lodgingService
   }
 
   return (
-    <div id='wrapper'>
-      <div id='header'>
-        <h1>Le Motel de Puro</h1>
-      </div>
       <div id='middle'>
         <div className='formBG'>
-          <h2>MUOKKAA MAJOITTAUTUMISTA</h2>
+          <h2 className='title'>MUOKKAA MAJOITTAUTUMISTA</h2>
           <form onSubmit={updateLodging}>
             <label>Saapumispäivä:</label> <br/>
             <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
@@ -91,10 +87,6 @@ lodgingService
           </form>
         </div>
       </div>
-      <div id='footer'>
-        <p>Heta Puro 2022</p>
-      </div>
-    </div>
   )
 
 }

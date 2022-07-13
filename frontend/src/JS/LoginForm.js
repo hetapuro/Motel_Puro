@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { loginUser } from "./services/auth"
+import { loginUser } from "../services/auth"
 import '../CSS/LoginForm.css'
 
 const LoginForm = ({ handleLogin }) => {
@@ -24,16 +24,16 @@ const LoginForm = ({ handleLogin }) => {
         <h1>Le Motel de Puro</h1>
         </div>
         <div id='middle'>
-        <div className='formBG'>
+        <div className='logIn'>
             <h1>TERVETULOA!</h1>
             <h2>Aloita kirjautumalla</h2>
             <form onSubmit={checkCredentials}>
             <label>Sähköposti:</label> <br/>
-            <input type='email' onChange={handleEmailChange} value={email} placeholder='esimerkki@esim.com'/> <br/>
+            <input className='logInput' type='email' onChange={handleEmailChange} value={email} placeholder='esimerkki@esim.com'/> <br/>
             <label>Salasana:</label> <br/>
-            <input type='password' value={password} onChange={handlePasswordChange} placeholder='salasana123'/> <br/>
+            <input className='logInput' type='password' value={password} onChange={handlePasswordChange} placeholder='salasana123'/> <br/>
 
-            <button className='submit' type='submit'>KIRJAUDU</button> 
+            <button className='logSubmit' type='submit'>KIRJAUDU</button> 
             </form>
             <p>
             <a href=''>Unohditko salasanasi?</a>

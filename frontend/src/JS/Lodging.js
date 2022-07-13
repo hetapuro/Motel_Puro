@@ -54,13 +54,9 @@ const Lodging = ({ authedUser }) => {
   }
 
   return (
-    <div id='wrapper'>
-      <div id='header'>
-        <h1>Le Motel de Puro</h1>
-      </div>
       <div id='middle'>
         <div className='formBG'>
-          <h2>KIRJAA MAJOITTAUTUMINEN</h2>
+          <h2 className='title'>KIRJAA MAJOITTAUTUMINEN</h2>
           <form onSubmit={addLodging}>
             <label>Saapumispäivä:</label> <br/>
             <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
@@ -80,10 +76,6 @@ const Lodging = ({ authedUser }) => {
           </form>
         </div>
       </div>
-      <div id='footer'>
-        <p>Heta Puro 2022</p>
-      </div>
-    </div>
   )
 
 }

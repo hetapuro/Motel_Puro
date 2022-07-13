@@ -1,4 +1,4 @@
-html, body, #root, #wrapper {
+html, body, #root, #log, #wrapper {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -10,7 +10,6 @@ html, body, #root, #wrapper {
   width: 100%;
   background-color: #fe0000;
   margin: 0;
-  border-bottom: 1px solid black;
 }
 
 h1, h2 {
@@ -21,16 +20,25 @@ h1, h2 {
   height: 82%;
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: scroll;
-  overflow-x: hidden;
+}
+
+label {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+  width: 14%;
+  padding-block: 3%;
+  background-color: black;
+  border: none;
+  border-radius: 12px;
+  color: white;
 }
 
 p {
-  margin-top: 0;
-  margin-bottom: 20%;
+  margin: 2%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

@@ -1,23 +1,4 @@
-html, body, #root, #wrapper {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #header {
-    height: 8%;
-    width: 100%;
-    background-color: #fe0000;
-    margin: 0;
-    border-bottom: 1px solid black;
-  }
-  
-  h1 {
-    margin: 0;
-  }
-  
-  h2 {
+  #all {
     padding: 1%;
     background-color: #ffff01;
     border: 1px solid #707070;
@@ -25,7 +6,7 @@ html, body, #root, #wrapper {
     margin-top: 0;
   }
   
-  #middle {
+  #histWrap {
     height: 82%;
     width: 100%;
     display: flex;
@@ -59,23 +40,6 @@ html, body, #root, #wrapper {
   .bold {
     font-size: larger;
     font-weight: bold;
-  }
-  
-  p {
-    margin-top: 0;
-    margin-bottom: 20%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  #footer {
-    height: 10%;
-    width: 100%;
-    background-color: black;
-  }
-  
-  #footer > p {
-    margin: 0;
-    color: white;
   }
   
   /* @media only screen and (max-width: 600px) {

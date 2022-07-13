@@ -1,30 +1,4 @@
-html, body, #root, #wrapper {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #header {
-    height: 8%;
-    width: 100%;
-    background-color: #fe0000;
-    margin: 0;
-  }
-  
-  h1, h2 {
-    margin: 0;
-  }
-  
-  #middle {
-    height: 82%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .formBG {
+  .logIn {
     height: auto;
     padding-bottom: 2%;
     width: 30%;
@@ -35,7 +9,7 @@ html, body, #root, #wrapper {
     text-align: center;
   }
 
-  .formBG > h1 {
+  .logIn > h1 {
     margin-top: 7%;
   }
   
@@ -46,7 +20,7 @@ html, body, #root, #wrapper {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  form {
+  .logIn > form {
     display: inline-block;
     width: 50%;
     margin-left: auto;
@@ -55,27 +29,14 @@ html, body, #root, #wrapper {
     font-size: larger;
   }
   
-  label {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  button {
-    width: 14%;
-    padding-block: 3%;
-    background-color: black;
-    border: none;
-    border-radius: 12px;
-    color: white;
-  }
-  
-  input {
+  .logInput {
     margin-top: 2%;
     margin-bottom: 4%;
     width: 100%;
     padding: 1%;
   }
   
-  .submit {
+  .logSubmit {
     width: 80%;
     padding-block: 8%;
     margin-left: 10%;
@@ -86,46 +47,31 @@ html, body, #root, #wrapper {
     color: black;
     text-decoration: none;
   }
-  
-  p {
-    margin: 2%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  #footer {
-    height: 10%;
-    width: 100%;
-    background-color: black;
-  }
-  
-  #footer > p {
-    margin: 0;
-    color: white;
-  }
 
   @media screen and (max-width: 1200px) {
-    form {
+    .logIn > form {
       width: 40%;
     }
   }
   
   @media only screen and (orientation: portrait) {
-    .formBG {
+    .logIn {
       width: 90%;
       height: auto;
     }
 
-    form {
+    .logIn > form {
       width: 50%;
     }
 
     h2 {
-      padding-block: 10%;
+      padding-top: 3%;
+      padding-bottom: 10%;
       width: 80%;
-      margin: auto;
+      padding-left: 10%;
     }
 
-    .submit {
+    .logSubmit {
       margin-bottom: 10%;
     }
   }

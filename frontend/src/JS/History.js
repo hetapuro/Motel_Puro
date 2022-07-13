@@ -30,12 +30,8 @@ const App = () => {
   }, [])
 
   return (
-    <div id='wrapper'>
-      <div id='header'>
-        <h1>Le Motel de Puro</h1>
-      </div>
-      <div id='middle'>
-        <h2>Majoituksia yhteensä: </h2>
+      <div id='histWrap'>
+        <h2 id="all">Majoituksia yhteensä: </h2>
         <table>
           <thead>
             <tr>
@@ -52,10 +48,6 @@ const App = () => {
           </tbody>
         </table>
       </div>
-      <div id='footer'>
-        <p>Heta Puro 2022</p>
-      </div>
-    </div>
   )
 
 }
