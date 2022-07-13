@@ -23,8 +23,7 @@ lodgingService
     const data = {
       arrival,
       adults,
-      children,
-      user_id: authedUser.id
+      children
     }
     lodgingService.update(data)
   }

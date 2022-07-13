@@ -81,7 +81,7 @@ const App = () => {
   }
 
   return (
-      <div id='root'>
+      <div id='log'>
           {!loggedIn && (
               <LoginForm handleLogin = {handleLogin}/>
           )}
