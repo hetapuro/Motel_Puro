@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import lodgingService from './services/lodging.js'
+import lodgingService from '../services/lodging.js'
 import axios from 'axios'
-import './CSS/Lodging.css'
+import '../CSS/Lodging.css'
 
 const App = () => {
   const [lodging, setLodging] = useState([])

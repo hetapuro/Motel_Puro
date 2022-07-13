@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import './CSS/History.css'
+import '../CSS/History.css'
 
 const Lodging = ({lodging}) => {
   const people = lodging.adults + lodging.children

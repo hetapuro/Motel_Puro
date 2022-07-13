@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { loginUser } from "./services/auth"
-import './CSS/LoginForm.css'
+import '../CSS/LoginForm.css'
 
 const LoginForm = ({ handleLogin }) => {
     const [email, setEmail ] = useState("")

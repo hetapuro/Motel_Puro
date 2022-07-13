@@ -1,13 +1,24 @@
-import { useState } from 'react'
-import lodgingService from './services/lodging'
-import './CSS/Lodging.css'
+import { useState, useEffect } from 'react'
+import lodgingService from '../services/lodging'
+import '../CSS/Lodging.css'
 
 const Lodging = ({ authedUser }) => {
-  const [adults, setAdults] = useState(1)
-  const [children, setChildren] = useState(0)
+
+  const [adults, setAdults] = useState(null)
+  const [children, setChildren] = useState(null)
   const [arrival, setArrival] = useState(new Date())
 
-  const addLodging = (event) => {
+useEffect(() => {
+lodgingService
+    .get_current()
+    .then(response => {
+    setAdults(response.data.adults === "" ? 0 : parseInt(response.data.adults))
+    setChildren(response.data.children === "" ? 0 : parseInt(response.data.children))
+    // setArrival(new Date(response.data.arrival))
+    })
+})
+
+  const updateLodging = (event) => {
     event.preventDefault()
     const data = {
       arrival,
@@ -15,7 +26,7 @@ const Lodging = ({ authedUser }) => {
       children,
       user_id: authedUser.id
     }
-    lodgingService.create(data)
+    lodgingService.update(data)
   }
 
   const minusA = () => {
@@ -61,8 +72,8 @@ const Lodging = ({ authedUser }) => {
       </div>
       <div id='middle'>
         <div className='formBG'>
-          <h2>KIRJAA MAJOITTAUTUMINEN</h2>
-          <form onSubmit={addLodging}>
+          <h2>MUOKKAA MAJOITTAUTUMISTA</h2>
+          <form onSubmit={updateLodging}>
             <label>Saapumispäivä:</label> <br/>
             <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
               
@@ -77,7 +88,7 @@ const Lodging = ({ authedUser }) => {
             <button type='button' onClick={plusC}>+</button>
             <p>Henkilöiden määrä: <b>{people}</b></p>
 
-            <button className='submit' type='submit'>KIRJAA</button>
+            <button className='submit' type='submit'>MUOKKAA</button>
           </form>
         </div>
       </div>
