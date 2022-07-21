@@ -1,31 +1,34 @@
 import { useState, useEffect } from 'react'
 import lodgingService from '../services/lodging'
 import '../CSS/Lodging.css'
+import { Router, useLocation } from 'react-router-dom'
 
-const Lodging = ({ authedUser }) => {
-
+const Lodging = () => {
+  const [id, setId] = useState(null)
   const [adults, setAdults] = useState(null)
   const [children, setChildren] = useState(null)
-  const [arrival, setArrival] = useState(new Date())
-
-useEffect(() => {
-lodgingService
-    .get_current()
-    .then(response => {
-    setAdults(response.data.adults === "" ? 0 : parseInt(response.data.adults))
-    setChildren(response.data.children === "" ? 0 : parseInt(response.data.children))
-    // setArrival(new Date(response.data.arrival))
-    })
-})
+  const [arrival, setArrival] = useState(null)
+  const location = useLocation()
+  
+  useEffect(() => {
+    const stateLodging = location.state
+    setId(stateLodging.id)
+    setAdults(stateLodging.adults)
+    setChildren(stateLodging.children)
+    setArrival(stateLodging.arrival)
+  },[])
 
   const updateLodging = (event) => {
     event.preventDefault()
-    const data = {
+    const changedLodging = {
       arrival,
       adults,
-      children
+      children,
+      departure: null
     }
-    lodgingService.update(data)
+    lodgingService
+    .update(id, changedLodging)
+    Router.push("/")
   }
 
   const minusA = () => {
@@ -66,7 +69,8 @@ lodgingService
 
   return (
       <div id='middle'>
-        <div className='formBG'>
+        {id && (
+          <div className='formBG'>
           <h2 className='title'>MUOKKAA MAJOITTAUTUMISTA</h2>
           <form onSubmit={updateLodging}>
             <label>Saapumispäivä:</label> <br/>
@@ -86,6 +90,7 @@ lodgingService
             <button className='submit' type='submit'>MUOKKAA</button>
           </form>
         </div>
+        )}
       </div>
   )
 

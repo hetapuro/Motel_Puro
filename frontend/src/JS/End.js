@@ -2,21 +2,25 @@ import { useState, useEffect } from 'react'
 import lodgingService from '../services/lodging.js'
 import axios from 'axios'
 import '../CSS/Lodging.css'
+import { Link } from "react-router-dom"
 
-const App = () => {
-  const [lodging, setLodging] = useState([])
+const App = ({propLodging, setCurrent}) => {
+  const [lodging, setLodging] = useState(propLodging)
   const [departure, setDeparture] = useState(new Date())
 
-  useEffect(() => {
-    lodgingService
-      .get_current()
-      .then(response => {
-        setLodging(response.data)
-      })
-  })
-
   const changeLodging = (event) => {
-    event.preventDefault()
+    event.preventDefault() 
+    const endLodging = {
+      arrival: lodging.arrival,
+      adults: lodging.adults,
+      children: lodging.children,
+      departure: departure
+    }
+    lodgingService
+    .update(lodging.id, endLodging)
+    .then(response => {
+      setCurrent(null)
+    })
   }
 
   const handleDepartureChange = (event) => {
@@ -25,12 +29,6 @@ const App = () => {
 
   const people = lodging.adults + lodging.children
   // const arrival = lodging.arrival.toString().slice(0, 10)
-
-  // lodgingService
-  //   .update(id, changedLodging)
-  //   .then(response => {
-  //     setLodgings(lodgings.map(lodging => lodging.id !== id ? lodging : response.data))
-  //   })
 
   return (
         <div id='middle'>
@@ -46,6 +44,7 @@ const App = () => {
                 <input className='date' value={departure.toISOString().slice(0, 10)} type='date' onChange={handleDepartureChange}/> <br/>
     
                 <button className='submit' type='submit'>KIRJAA</button>
+                <button className='submit' type=''> <Link to="/muokkaa" id="change" state={lodging}>MUOKKAA</Link></button>
               </form>
           </div>
         </div>

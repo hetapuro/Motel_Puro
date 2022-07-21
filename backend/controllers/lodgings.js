@@ -36,13 +36,13 @@ const Lodging = require("../models/lodging")
       departure: req.body.departure,
       user_id: req.body.user_id
     }
-    updatedLodging = await Blog.findByIdAndUpdate(request.params.id, new_lodging)
-    response.json(updatedLodging)
+    updatedLodging = await Lodging.findByIdAndUpdate(req.params.id, new_lodging)
+    res.json(updatedLodging)
   })
 
   lodgingsRouter.get("/current", async (req, res) => {
     const lodgings = await Lodging.find({user_id: req.user.id}).populate("user_id")
-    const current_lodging = lodgings.filter(lodging => lodging.departure === null)
+    const current_lodging = lodgings.filter(lodging => lodging.departure === null)[0]
     res.json(current_lodging)
   })
 
