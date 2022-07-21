@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import lodgingService from './services/lodging'
-import axios from 'axios'
 import "./CSS/App.css"
 import LoginForm from "./JS/LoginForm"
 import Lodging from "./JS/Lodging"
@@ -34,6 +32,7 @@ const App = () => {
   useEffect(() => {
       if(authedUser){
           setLoggedIn(true)
+          Router.push("/")
       }
   }, [authedUser])
 
@@ -47,12 +46,12 @@ const App = () => {
                   <Router>
                     <div id='header'>
                       <h1>Le Motel de Puro</h1>
-                      <Link to="/home">Majoitus</Link>
+                      <Link to="/">Majoitus</Link>
                       <Link to="/historia">Historia</Link>
                     </div>
                     
                     <Routes>
-                      <Route path="/home" element={<Lodging />} />
+                      <Route path="/" element={<Lodging />} />
                       <Route path="/historia" element={<History />} />
                     </Routes>
 

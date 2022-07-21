@@ -45,7 +45,6 @@ const LoginForm = ({ handleLogin }) => {
         </div>
     </div>
     )
-
 }
 
 export default LoginForm
