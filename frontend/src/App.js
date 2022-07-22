@@ -66,7 +66,7 @@ const App = () => {
                       <Route path="/" element={<Lodging />} />
                     )}
                       <Route path="/historia" element={<History />} />
-                      <Route path="/muokkaa" element={<Change/>} />                                     
+                      <Route path="/muokkaa" element={<Change setCurrent={setCurrent}/>} />                                     
                     </Routes>
 
                     <div id='footer'>

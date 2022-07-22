@@ -1,49 +1,38 @@
 import { useState, useEffect } from 'react'
 import lodgingService from '../services/lodging'
 import '../CSS/Lodging.css'
-import { Router, useLocation } from 'react-router-dom'
+import { Router, useLocation, useNavigate } from 'react-router-dom'
 
-const Lodging = () => {
+const Lodging = ({setCurrent}) => {
   const [id, setId] = useState(null)
   const [adults, setAdults] = useState(null)
   const [children, setChildren] = useState(null)
   const [arrival, setArrival] = useState(null)
   const location = useLocation()
-
-  //disabling future dates
-  var today = new Date()
-  var dd = today.getDate()
-  var mm = today.getMonth() + 1
-  var yyyy = today.getFullYear()
-
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-
-  today = yyyy + '-' + mm + '-' + dd
-  
+  const navigate = useNavigate()
   useEffect(() => {
     const stateLodging = location.state
+    console.log("lodging", stateLodging)
     setId(stateLodging.id)
     setAdults(stateLodging.adults)
     setChildren(stateLodging.children)
-    setArrival(stateLodging.arrival)
+    setArrival(new Date(stateLodging.arrival))
   },[])
 
-  const updateLodging = (event) => {
+  const updateLodging = async (event) => {
     event.preventDefault()
     const changedLodging = {
+      id,
       arrival,
       adults,
       children,
       departure: null
     }
-    lodgingService
-    .update(id, changedLodging)
-    Router.push("/")
+    await lodgingService
+    .update(changedLodging)
+    await setCurrent(changedLodging)
+    navigate("/")
+    
   }
 
   const minusA = () => {
@@ -89,7 +78,7 @@ const Lodging = () => {
           <h2 className='title'>MUOKKAA MAJOITTAUTUMISTA</h2>
           <form onSubmit={updateLodging}>
             <label>Saapumispäivä:</label> <br/>
-            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange} max={today}/> <br/>
+            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
               
             <label>Aikuisia:</label> <br/>
             <button type='button' onClick={minusA}>-</button>

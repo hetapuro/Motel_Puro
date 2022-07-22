@@ -8,6 +8,7 @@ const App = ({propLodging, setCurrent}) => {
   const [lodging, setLodging] = useState(propLodging)
   const [departure, setDeparture] = useState(new Date())
 
+  console.log(lodging)
     //disabling future dates
     let today = new Date()
     let dd = today.getDate()
@@ -44,7 +45,7 @@ const App = ({propLodging, setCurrent}) => {
 
   const people = lodging.adults + lodging.children
 
-  let arrival = lodging.arrival
+  let arrival = new Date(lodging.arrival)
   let DD = arrival.getDate()
   let MM = arrival.getMonth() + 1
   let YYYY = arrival.getFullYear()
