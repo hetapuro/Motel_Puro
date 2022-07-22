@@ -51,11 +51,14 @@
     table{
       border: 1px solid transparent;
     }
-    thead {
-      display: none;
+    thead > tr{
+      position: absolute;
+      top: -9999px; /*for accessibility*/
+      left: -9999px;
     }
     tbody > tr {
-        border-bottom: 45px solid #707070;
+      border: none;
+      border-bottom: 45px solid #707070;
     }
     tbody > td:first-child {
       padding-left: 10px;
