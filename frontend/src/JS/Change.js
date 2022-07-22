@@ -30,7 +30,7 @@ const Lodging = () => {
     setId(stateLodging.id)
     setAdults(stateLodging.adults)
     setChildren(stateLodging.children)
-    setArrival(stateLodging.arrival)
+    setArrival(new Date(stateLodging.arrival))
   },[])
 
   const updateLodging = (event) => {
