@@ -4,14 +4,18 @@ import '../CSS/History.css'
 
 const Lodging = ({lodging}) => {
   const people = lodging.adults + lodging.children
-  const a = lodging.arrival.toString().slice(0, 10)
+  let a = lodging.arrival
+  let dd = a.getDate()
+  let mm = a.getMonth()
+  let yyyy = a.getFullYear()
+  a = dd + '.' + mm + '.' + yyyy
 
   return (
     <tr>
-      <th>Etunimi Sukunimi</th>
-      <th>{a}</th>
-      <th>{lodging.departure}</th>
-      <th>{people}</th>
+      <td data-label="Nimi">Etunimi Sukunimi</td>
+      <td data-label="Saapumispäivä">{a}</td>
+      <td data-label="Lähtöpäivä">{lodging.departure}</td>
+      <td data-label="Henkilöt">{people}</td>
     </tr>
   )
 }

@@ -9,6 +9,21 @@ const Lodging = () => {
   const [children, setChildren] = useState(null)
   const [arrival, setArrival] = useState(null)
   const location = useLocation()
+
+  //disabling future dates
+  var today = new Date()
+  var dd = today.getDate()
+  var mm = today.getMonth() + 1
+  var yyyy = today.getFullYear()
+
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+
+  today = yyyy + '-' + mm + '-' + dd
   
   useEffect(() => {
     const stateLodging = location.state
@@ -74,7 +89,7 @@ const Lodging = () => {
           <h2 className='title'>MUOKKAA MAJOITTAUTUMISTA</h2>
           <form onSubmit={updateLodging}>
             <label>Saapumispäivä:</label> <br/>
-            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
+            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange} max={today}/> <br/>
               
             <label>Aikuisia:</label> <br/>
             <button type='button' onClick={minusA}>-</button>

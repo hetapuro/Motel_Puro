@@ -3,6 +3,20 @@ import lodgingService from '../services/lodging'
 import '../CSS/Lodging.css'
 
 const Lodging = ({ authedUser }) => {
+  var today = new Date()
+  var dd = today.getDate()
+  var mm = today.getMonth() + 1
+  var yyyy = today.getFullYear()
+
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+
+  today = yyyy + '-' + mm + '-' + dd
+
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [arrival, setArrival] = useState(new Date())
@@ -59,7 +73,7 @@ const Lodging = ({ authedUser }) => {
           <h2 className='title'>KIRJAA MAJOITTAUTUMINEN</h2>
           <form onSubmit={addLodging}>
             <label>Saapumispäivä:</label> <br/>
-            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange}/> <br/>
+            <input className='date' value={arrival.toISOString().slice(0, 10)} type='date' onChange={handleArrivalChange} max={today}/> <br/>
               
             <label>Aikuisia:</label> <br/>
             <button type='button' onClick={minusA}>-</button>
